@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Handle -->
+  <path d="M13 4 L13 2 L19 2 L19 4" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+  <!-- Top cap -->
+  <rect x="10" y="4" width="12" height="3" fill="#111"/>
+  <!-- Glass body -->
+  <rect x="11" y="7" width="10" height="14" fill="#f5d742" stroke="#111" stroke-width="1.5"/>
+  <!-- Flame -->
+  <ellipse cx="16" cy="13" rx="2.5" ry="4" fill="#ff9500"/>
+  <ellipse cx="16" cy="12" rx="1.5" ry="2.5" fill="#ffdd00"/>
+  <!-- Bottom cap -->
+  <rect x="10" y="21" width="12" height="3" fill="#111"/>
+  <!-- Base -->
+  <rect x="12" y="24" width="8" height="2" fill="#111"/>
+</svg>

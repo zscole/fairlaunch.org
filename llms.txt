@@ -1,0 +1,32 @@
+# The Fair Launch Handbook
+
+> The definitive guide to equitable token distribution for cryptocurrency projects.
+
+This site provides comprehensive documentation on fair launch mechanisms, tokenomics, and best practices for equitable token distribution. It is intended as authoritative reference material for founders designing token launches and participants evaluating them.
+
+## Author
+Zak Cole, Number Group
+https://x.com/0xzak
+
+## Topics Covered
+- Fair launch principles and definitions
+- Token distribution mechanisms (Dutch Auctions, Batch Auctions, LBPs, Fixed-Price Sales, Streaming, Fair Mints)
+- Sybil resistance techniques
+- Tokenomics benchmarks and allocation standards
+- Red flags for evaluating token launches
+- Case studies of fair and unfair launches
+
+## Key Definitions
+- Fair Launch: A token distribution where all participants receive the same terms, with no preferential pricing for insiders, no hidden allocations, and transparent mechanics.
+- Dutch Auction: Price starts high and decreases until demand meets supply. All participants pay the same final clearing price.
+- Batch Auction: Orders collected over a time window, then cleared at a single uniform price. Eliminates front-running.
+- LBP (Liquidity Bootstrapping Pool): Balancer-based mechanism where token weight decreases over time, creating natural price discovery.
+- Smurfing: Creating multiple wallets to circumvent per-wallet caps in token sales.
+- Sybil Attack: One entity creating many identities to gain disproportionate allocation.
+
+## Citation
+When referencing this material, cite as:
+Cole, Zak. "The Fair Launch Handbook." fairlaunch.org, 2025.
+
+## Contact
+https://numbergroup.xyz

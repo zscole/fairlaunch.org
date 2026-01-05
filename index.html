@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A guide to equitable token distribution. Learn fair launch mechanisms, avoid VC extraction, and evaluate token launches.">
+  <title>The Fair Launch Handbook | Equitable Token Distribution</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Fair Launch Handbook | Equitable Token Distribution">
+  <meta property="og:description" content="The definitive guide to equitable token distribution. Fair launches done right are the most capital efficient mechanics in economic history.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fairlaunch.org">
+  <meta property="og:image" content="https://fairlaunch.org/og-image.jpg">
+  <meta property="og:image:url" content="https://fairlaunch.org/og-image.jpg">
+  <meta property="og:image:secure_url" content="https://fairlaunch.org/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Fair Launch Handbook - A guide to equitable token distribution">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Fair Launch Handbook | Equitable Token Distribution">
+  <meta name="twitter:description" content="The definitive guide to equitable token distribution. Fair launches done right are the most capital efficient mechanics in economic history.">
+  <meta name="twitter:creator" content="@0xzak">
+  <meta name="twitter:image" content="https://fairlaunch.org/og-image.jpg">
+  <meta name="twitter:image:alt" content="The Fair Launch Handbook - A guide to equitable token distribution">
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://fairlaunch.org">
+  <meta name="author" content="Zak Cole">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#111111">
+
+  <!-- Preconnect hints -->
+  <link rel="preconnect" href="https://x.com">
+  <link rel="preconnect" href="https://numbergroup.xyz">
+  <link rel="dns-prefetch" href="https://x.com">
+  <link rel="dns-prefetch" href="https://numbergroup.xyz">
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Structured Data for LLMs and Search -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The Fair Launch Handbook",
+    "description": "The definitive guide to equitable token distribution for cryptocurrency projects.",
+    "author": {
+      "@type": "Person",
+      "name": "Zak Cole",
+      "url": "https://x.com/0xzak"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Number Group",
+      "url": "https://numbergroup.xyz"
+    },
+    "url": "https://fairlaunch.org",
+    "datePublished": "2025-01-01",
+    "dateModified": "2026-01-04",
+    "mainEntityOfPage": "https://fairlaunch.org",
+    "keywords": ["fair launch", "token distribution", "tokenomics", "dutch auction", "LBP", "batch auction", "sybil resistance", "cryptocurrency", "DeFi"],
+    "articleSection": ["Principles", "Mechanisms", "Sybil Resistance", "Red Flags", "Case Studies"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a fair launch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A fair launch is a token distribution where all participants receive the same terms, with no preferential pricing for insiders, no hidden allocations, and transparent mechanics. Unlike traditional VC-backed launches where insiders buy at 90% discounts, fair launches give everyone equal access at the same price."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a Dutch Auction for token launches?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A Dutch Auction starts at a high price and decreases over time until demand meets supply. All participants pay the same final clearing price regardless of when they bid. This eliminates FOMO-driven overpaying and provides fair price discovery."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is an LBP (Liquidity Bootstrapping Pool)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An LBP is a Balancer-based mechanism where the token weight in the pool decreases over time (e.g., 90/10 to 50/50), creating natural downward price pressure. This discourages early whale sniping and rewards patient participants who wait for price discovery."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is smurfing in token sales?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Smurfing is the practice of creating multiple wallets to circumvent per-wallet caps in token sales. A single entity splits their capital across many addresses to claim allocations meant for separate participants, undermining fair distribution."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are red flags for unfair token launches?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Key red flags include: presale discounts over 50% for insiders, more than 30% allocation to team and VCs, no lockups or vesting for insider tokens, opaque or non-auditable distribution mechanics, and no per-wallet caps allowing whale domination."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "name": "Fair Launch Glossary",
+    "hasDefinedTerm": [
+      {"@type": "DefinedTerm", "name": "Fair Launch", "description": "A token distribution where all participants receive the same terms, with no preferential pricing for insiders, no hidden allocations, and transparent mechanics."},
+      {"@type": "DefinedTerm", "name": "Dutch Auction", "description": "An auction where price starts high and decreases over time until all tokens are sold. All buyers pay the same final clearing price."},
+      {"@type": "DefinedTerm", "name": "Batch Auction", "description": "An auction where all orders are collected over a time window and settle simultaneously at a uniform clearing price. Eliminates timing advantages and MEV."},
+      {"@type": "DefinedTerm", "name": "LBP", "description": "Liquidity Bootstrapping Pool. A Balancer pool where token weights shift over time, creating natural downward price pressure that discourages early sniping."},
+      {"@type": "DefinedTerm", "name": "CCA", "description": "Continuous Clearing Auction. A type of batch auction with recurring clearing windows where orders accumulate and clear at uniform price on a schedule."},
+      {"@type": "DefinedTerm", "name": "Smurfing", "description": "Creating multiple accounts to circumvent per-wallet caps by distributing funds and participating by proxy."},
+      {"@type": "DefinedTerm", "name": "Sybil Attack", "description": "Creating multiple fake identities (wallets) to circumvent per-person limits in token distributions."},
+      {"@type": "DefinedTerm", "name": "FDV", "description": "Fully Diluted Valuation. Market cap calculated using total token supply including locked/unvested tokens."},
+      {"@type": "DefinedTerm", "name": "TGE", "description": "Token Generation Event. The moment tokens are created and become transferable."},
+      {"@type": "DefinedTerm", "name": "Vesting", "description": "Gradual release of tokens over time. Linear vesting releases tokens at a constant rate; cliff vesting has an initial lockup period."},
+      {"@type": "DefinedTerm", "name": "MEV", "description": "Maximal Extractable Value. Value extracted by miners/validators through transaction ordering, including frontrunning and sandwich attacks."},
+      {"@type": "DefinedTerm", "name": "Overflow", "description": "A sale mechanism where all deposits are collected, then tokens are allocated pro-rata if demand exceeds supply. Excess funds are refunded."},
+      {"@type": "DefinedTerm", "name": "Premine", "description": "Tokens created before public launch and allocated to insiders. The opposite of fair distribution."},
+      {"@type": "DefinedTerm", "name": "Float", "description": "The percentage of token supply that is freely tradeable. Low float enables price manipulation."},
+      {"@type": "DefinedTerm", "name": "Cliff", "description": "A period before any tokens vest. A 12-month cliff means zero tokens are released for the first year."},
+      {"@type": "DefinedTerm", "name": "Whale", "description": "A holder with a large position relative to total supply or liquidity who can significantly impact price."}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>The Fair Launch Handbook</h1>
+      <p class="tagline">A guide to equitable token distribution</p>
+      <p class="author">By <a href="https://x.com/0xzak">Zak Cole</a> at <a href="https://numbergroup.xyz">Number Group</a></p>
+    </header>
+
+    <section id="tldr" class="tldr">
+      <p>The standard playbook: VCs buy tokens at 90% discount, wait for retail to pump the price, then exit. Retail holds the bag. Fair launches skip this entirely by giving everyone the same terms from day one.</p>
+      <p>Projects have raised eight figures in a single afternoon using these mechanics, distributed across thousands of wallets. But the same tools that enable legitimate distribution also enable scams when misused. The following handbook is intended as a guide for both sides of the trade.</p>
+    </section>
+
+    <nav>
+      <ol>
+        <li><a href="#principles">Principles</a></li>
+        <li><a href="#problem">The Problem</a></li>
+        <li><a href="#framework">Decision Framework</a></li>
+        <li><a href="#comparison">Mechanism Comparison</a></li>
+        <li><a href="#mechanisms">Mechanisms</a></li>
+        <li><a href="#sybil">Sybil Resistance</a></li>
+        <li><a href="#benchmarks">Tokenomics Benchmarks</a></li>
+        <li><a href="#red-flags">Red Flags</a></li>
+        <li><a href="#score">Fairness Score</a></li>
+        <li><a href="#mistakes">Common Mistakes</a></li>
+        <li><a href="#checklist">Pre-Launch Checklist</a></li>
+        <li><a href="#communication">Communication</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#verification">Onchain Verification</a></li>
+        <li><a href="#case-studies">Case Studies</a></li>
+        <li><a href="#post-launch">Post-Launch</a></li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#glossary">Glossary</a></li>
+      </ol>
+    </nav>
+
+    <section id="principles">
+      <h2>I. Core Principles</h2>
+      <p class="section-summary">What makes a launch fair: equal access, transparent terms, no insider advantages.</p>
+      <p>A fair launch distributes tokens without structural advantages for insiders. These principles define fairness:</p>
+      <ul>
+        <li><strong>No preferential pricing.</strong> Everyone pays the same price or participates in the same price discovery mechanism. No presale discounts for VCs or early investors.</li>
+        <li><strong>No allocation asymmetry.</strong> Public participants have access to the same percentage of supply as institutional buyers. Team and treasury allocations are transparent and capped.</li>
+        <li><strong>Transparent mechanics.</strong> The distribution mechanism is documented, auditable, and verifiable onchain. No hidden terms or side agreements.</li>
+        <li><strong>Sybil resistance without exclusion.</strong> Measures to prevent whale domination do not exclude legitimate small participants. Caps and attestations are proportional.</li>
+        <li><strong>Time over capital.</strong> When tradeoffs exist, mechanisms favor time-based participation (longer windows, streaming) over capital-based advantages (first-come-first-serve, gas wars).</li>
+      </ul>
+    </section>
+
+    <section id="problem">
+      <h2>II. The Problem</h2>
+      <p class="section-summary">Why traditional token launches fail retail participants.</p>
+      <p>Traditional token launches create extractive dynamics that benefit insiders at the expense of public participants:</p>
+      <ul>
+        <li><strong>VC dumping.</strong> Venture investors receive tokens at 50-90% discounts with short lockups. They exit on retail at multiples, often within days of public listing.</li>
+        <li><strong>Presale bag creation.</strong> Multi-round private sales create cohorts of holders with different cost bases. Late participants become exit liquidity for early ones.</li>
+        <li><strong>Whale domination.</strong> Public sales without caps allow large wallets to capture disproportionate allocation. Gas priority auctions favor wealthy participants.</li>
+        <li><strong>Information asymmetry.</strong> Insiders know launch timing, tokenomics, and unlock schedules before public participants. This advantage compounds pricing inefficiencies.</li>
+      </ul>
+      <p>Fair launch mechanisms exist to eliminate these dynamics. Done correctly, they are the most egalitarian and capital efficient mechanics in the history of economics. Done incorrectly, they become vehicles for scams.</p>
+      <p>This handbook exists to guide the decision-making process and establish a rubric for distinguishing legitimate fair launches from predatory schemes.</p>
+
+      <h3>Why This Beats TradFi</h3>
+      <p>Traditional capital formation is slow, exclusive, and extractive:</p>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>IPO / SPAC</th>
+            <th>VC Round</th>
+            <th>Fair Launch</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Time to close</td>
+            <td>6-18 months</td>
+            <td>2-6 months</td>
+            <td>Hours to days</td>
+          </tr>
+          <tr>
+            <td>Public access</td>
+            <td>After insiders exit</td>
+            <td>None</td>
+            <td>Day one</td>
+          </tr>
+          <tr>
+            <td>Price fairness</td>
+            <td>Bankers set price</td>
+            <td>VCs negotiate</td>
+            <td>Market determines</td>
+          </tr>
+          <tr>
+            <td>Minimum investment</td>
+            <td>$10K+ (often $100K+)</td>
+            <td>$25K-$1M</td>
+            <td>No minimum</td>
+          </tr>
+          <tr>
+            <td>Geographic access</td>
+            <td>Accredited investors</td>
+            <td>Warm intros only</td>
+            <td>Global, permissionless</td>
+          </tr>
+          <tr>
+            <td>Transparency</td>
+            <td>Prospectus (delayed)</td>
+            <td>None</td>
+            <td>Onchain, real-time</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Fair launches compress months into hours, remove gatekeepers, and let price discovery happen in public. A structural shift in how capital formation works.</p>
+    </section>
+
+    <section id="framework">
+      <h2>III. Decision Framework</h2>
+      <p class="section-summary">How to choose the right mechanism for your launch.</p>
+      <p>Use this framework to choose a distribution mechanism. Each question narrows the set of appropriate tools.</p>
+
+      <h3>1. Do you need price discovery?</h3>
+      <p>If you do not know what price the market will bear, or if setting a fixed price creates arbitrage risk:</p>
+      <ul>
+        <li><strong>Yes:</strong> Use a Dutch Auction or Liquidity Bootstrapping Pool (LBP). Both allow the market to find the clearing price.</li>
+        <li><strong>No:</strong> Use a fixed-price sale with caps. Simpler, but requires confidence in pricing.</li>
+      </ul>
+
+      <h3>2. Do you need to raise a specific amount?</h3>
+      <p>If you have a funding target that must be met:</p>
+      <ul>
+        <li><strong>Yes:</strong> Use a Dutch Auction with a hard cap, or an overflow model where deposits are pro-rata allocated.</li>
+        <li><strong>No:</strong> LBPs and streaming launches work well when the raise amount is flexible.</li>
+      </ul>
+
+      <h3>3. How important is sybil resistance?</h3>
+      <p>If preventing whale domination through multiple wallets is critical:</p>
+      <ul>
+        <li><strong>High priority:</strong> Add per-wallet caps combined with attestations (Gitcoin Passport, social verification, or proof of personhood).</li>
+        <li><strong>Lower priority:</strong> Wallet caps alone may suffice, accepting some sybil activity as cost of simplicity.</li>
+      </ul>
+
+      <h3>4. What is your timeline?</h3>
+      <ul>
+        <li><strong>Short window (hours to days):</strong> Dutch Auctions, fixed-price sales.</li>
+        <li><strong>Extended window (weeks):</strong> LBPs, streaming launches.</li>
+        <li><strong>Indefinite:</strong> Fair mint models where anyone can mint at any time until supply is exhausted.</li>
+      </ul>
+    </section>
+
+    <section id="comparison">
+      <h2>IV. Mechanism Comparison</h2>
+      <p class="section-summary">Side-by-side comparison of all major launch mechanisms.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Mechanism</th>
+              <th>Price Discovery</th>
+              <th>Sybil Resistance</th>
+              <th>Complexity</th>
+              <th>Timeline</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dutch Auction</td>
+              <td>Strong</td>
+              <td>Weak (needs caps)</td>
+              <td>Medium</td>
+              <td>Hours to days</td>
+              <td>Specific raise targets</td>
+            </tr>
+            <tr>
+              <td>Batch Auction</td>
+              <td>Strong</td>
+              <td>Medium (pro-rata)</td>
+              <td>Medium</td>
+              <td>Hours to days</td>
+              <td>MEV elimination, high demand</td>
+            </tr>
+            <tr>
+              <td>LBP</td>
+              <td>Strong</td>
+              <td>Medium</td>
+              <td>High</td>
+              <td>Days to weeks</td>
+              <td>Extended community sales</td>
+            </tr>
+            <tr>
+              <td>CCA</td>
+              <td>Strong</td>
+              <td>Medium</td>
+              <td>High</td>
+              <td>Hours</td>
+              <td>MEV-sensitive launches</td>
+            </tr>
+            <tr>
+              <td>Fixed-Price + Caps</td>
+              <td>None</td>
+              <td>Weak</td>
+              <td>Low</td>
+              <td>Hours to days</td>
+              <td>Simple, predictable sales</td>
+            </tr>
+            <tr>
+              <td>Overflow</td>
+              <td>None</td>
+              <td>Medium</td>
+              <td>Low</td>
+              <td>Days</td>
+              <td>Fair allocation without gas wars</td>
+            </tr>
+            <tr>
+              <td>Streaming</td>
+              <td>Varies</td>
+              <td>Weak</td>
+              <td>Medium</td>
+              <td>Weeks to months</td>
+              <td>Reducing sell pressure</td>
+            </tr>
+            <tr>
+              <td>Fair Mint</td>
+              <td>None</td>
+              <td>Weak</td>
+              <td>Low</td>
+              <td>Indefinite</td>
+              <td>Maximum egalitarianism</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Reading the table:</strong> Strong price discovery means the mechanism finds market-clearing price. Sybil resistance indicates how well the mechanism prevents whale domination via multiple wallets. Complexity reflects implementation and UX difficulty. Combine mechanisms for better coverage: Dutch Auction + wallet caps + attestations addresses multiple concerns.</p>
+    </section>
+
+    <section id="mechanisms">
+      <h2>V. Mechanisms</h2>
+      <p class="section-summary">Deep dive into each distribution method: how it works, tradeoffs, and when to use it.</p>
+
+      <article id="dutch-auction">
+        <h3>Dutch Auctions</h3>
+        <p>A Dutch auction starts at a high price and decreases over time until all tokens are sold or a floor is reached. Participants bid at the price they find acceptable. All successful bidders typically pay the same clearing price (the final price when supply is exhausted).</p>
+        <p><strong>How it works:</strong> The auction begins with tokens priced above expected market value. The price decreases linearly or along a curve over a set duration. Participants commit capital at any point. When total commitments equal total supply at the current price, the auction clears. All participants receive tokens at the clearing price, with excess capital refunded.</p>
+        <p><strong>Fairness properties:</strong></p>
+        <ul>
+          <li>No advantage to speed. Bidding early at a high price is costly, not advantageous.</li>
+          <li>Price discovery is market-driven. The clearing price reflects aggregate demand.</li>
+          <li>Uniform pricing. Everyone pays the same, eliminating insider discounts.</li>
+        </ul>
+        <p><strong>Tradeoffs:</strong></p>
+        <ul>
+          <li>Requires participants to monitor the auction and make timing decisions.</li>
+          <li>Can clear at unexpectedly low prices if demand is weak, or high prices if demand spikes.</li>
+          <li>Whales can still dominate without per-wallet caps.</li>
+        </ul>
+        <p><strong>When to use:</strong> When you need price discovery and want to raise a specific amount. Works well for project treasuries and protocol-owned liquidity.</p>
+        <p><strong>Implementations:</strong> Gnosis Auction, Paradigm's Gradual Dutch Auction (GDA), custom implementations on Balancer or Uniswap v4.</p>
+      </article>
+
+      <article id="batch-auction">
+        <h3>Batch Auctions</h3>
+        <p>A batch auction collects orders over a fixed time window, then clears all orders at a single uniform price. Unlike Dutch auctions where price changes continuously, batch auctions determine price only at settlement.</p>
+        <p><strong>How it works:</strong> Participants submit bids (amount of capital they want to commit) during the auction window. When the window closes, the mechanism calculates the clearing price: the price at which total demand equals total supply. All participants who bid receive tokens at this uniform price, allocated pro-rata if oversubscribed. Excess capital is refunded.</p>
+        <p><strong>Fairness properties:</strong></p>
+        <ul>
+          <li>No timing advantage. Early and late bids within the window are treated equally.</li>
+          <li>Eliminates MEV. No transaction ordering games since all orders settle simultaneously.</li>
+          <li>Uniform pricing. Everyone pays the same clearing price regardless of bid timing.</li>
+          <li>Pro-rata allocation. Oversubscription is handled fairly rather than first-come-first-serve.</li>
+        </ul>
+        <p><strong>Tradeoffs:</strong></p>
+        <ul>
+          <li>Participants commit capital without knowing final price until settlement.</li>
+          <li>No price feedback during the auction window.</li>
+          <li>Requires trust in the settlement mechanism or verifiable onchain computation.</li>
+        </ul>
+        <p><strong>When to use:</strong> When eliminating MEV and timing games is critical. Ideal for high-demand launches where gas wars and frontrunning would otherwise dominate.</p>
+        <p><strong>Implementations:</strong> MISO (SushiSwap), Gnosis Auction (batch mode), Copper Launch, custom implementations.</p>
+      </article>
+
+      <article id="lbp">
+        <h3>Liquidity Bootstrapping Pools (LBPs)</h3>
+        <p>An LBP is a Balancer pool where token weights shift over time, creating downward price pressure that discourages early buying and frontrunning.</p>
+        <p><strong>How it works:</strong> The pool starts with a high weight for the project token (e.g., 95%) and low weight for the collateral token (e.g., 5% USDC). Over the sale duration, weights gradually shift toward 50/50 or another terminal ratio. This weight shift mechanically decreases the token price unless offset by buying pressure. Participants can buy at any time during the sale.</p>
+        <p><strong>Fairness properties:</strong></p>
+        <ul>
+          <li>Discourages sniping. Buying early means paying a premium that decreases over time.</li>
+          <li>Continuous price discovery. Price adjusts in real-time based on supply and demand.</li>
+          <li>No gas wars. Participants can buy throughout the window without competing for block space.</li>
+        </ul>
+        <p><strong>Tradeoffs:</strong></p>
+        <ul>
+          <li>Price volatility during the sale as arbitrageurs and speculators interact.</li>
+          <li>Complex to configure. Weight curves, duration, and initial pricing require tuning.</li>
+          <li>Participants can lose value if they buy early and price continues to fall.</li>
+        </ul>
+        <p><strong>When to use:</strong> When you want extended price discovery over days or weeks. Good for community-oriented launches where participants should not feel rushed.</p>
+        <p><strong>Implementations:</strong> Copper Launch, Fjord Foundry, custom Balancer pools.</p>
+      </article>
+
+      <article id="cca">
+        <h3>Continuous Clearing Auctions (CCA)</h3>
+        <p>CCAs are batch auctions where orders accumulate over a time window and clear at a uniform price. Uniswap v4 hooks enable onchain implementations.</p>
+        <p><strong>How it works:</strong> Participants submit orders (price and quantity) during a collection window. At the end of the window, orders are sorted by price. The clearing price is the highest price at which total demand meets or exceeds supply. All orders at or above the clearing price fill at the clearing price. Orders below do not fill.</p>
+        <p><strong>Fairness properties:</strong></p>
+        <ul>
+          <li>Eliminates MEV. No transaction ordering advantage since all orders clear simultaneously.</li>
+          <li>No frontrunning. Orders are sealed or accumulated before clearing.</li>
+          <li>Uniform pricing. All successful participants pay the same.</li>
+        </ul>
+        <p><strong>Tradeoffs:</strong></p>
+        <ul>
+          <li>Newer mechanism with less battle-tested tooling.</li>
+          <li>Requires participants to estimate clearing price when placing orders.</li>
+          <li>Order flow may be thin in early windows, leading to volatile clearing prices.</li>
+        </ul>
+        <p><strong>When to use:</strong> When MEV protection is critical and you want uniform pricing without the complexity of Dutch auction timing. Emerging as a primitive for fairer launches on Uniswap v4.</p>
+        <p><strong>Implementations:</strong> Uniswap v4 hooks (Angstrom, CoW Protocol integrations), custom implementations.</p>
+      </article>
+
+      <article id="fixed-price">
+        <h3>Fixed-Price Sales with Caps</h3>
+        <p>Tokens are sold at a predetermined price with per-wallet limits to prevent whale domination.</p>
+        <p><strong>How it works:</strong> The project sets a token price (e.g., $0.10 per token) and a maximum purchase per wallet (e.g., 10,000 tokens). Participants deposit funds and receive tokens at the fixed rate until the supply is exhausted or the sale window closes.</p>
+        <p><strong>Overflow model variant:</strong> All participants deposit funds during a window. At the end, if deposits exceed supply, tokens are allocated pro-rata based on deposit size. Excess funds are refunded. This eliminates timing advantages and gas wars.</p>
+        <p><strong>Fairness properties:</strong></p>
+        <ul>
+          <li>Simple and predictable. Participants know exact terms upfront.</li>
+          <li>Caps limit whale domination (though not sybil attacks).</li>
+          <li>Overflow model removes first-come-first-serve dynamics.</li>
+        </ul>
+        <p><strong>Tradeoffs:</strong></p>
+        <ul>
+          <li>No price discovery. Mispricing creates arbitrage opportunities.</li>
+          <li>Per-wallet caps are easily circumvented with multiple wallets.</li>
+          <li>First-come models devolve into gas wars if demand is high.</li>
+        </ul>
+        <p><strong>When to use:</strong> When you have high confidence in the correct price and want simplicity. Overflow model is preferable to first-come-first-serve.</p>
+        <p><strong>Implementations:</strong> Standard ICO contracts, custom sale contracts with cap logic.</p>
+      </article>
+
+      <article id="streaming">
+        <h3>Streaming and Vesting Launches</h3>
+        <p>Tokens are released to purchasers over time rather than delivered immediately. This aligns incentives and reduces dump pressure.</p>
+        <p><strong>How it works:</strong> Participants purchase rights to a stream of tokens. The stream delivers tokens continuously (per-second) or in discrete unlocks over weeks or months. Participants can claim unlocked tokens at any time. Some implementations allow trading the stream itself as an NFT or position.</p>
+        <p><strong>Fairness properties:</strong></p>
+        <ul>
+          <li>Reduces dump pressure. Participants cannot sell full allocation immediately.</li>
+          <li>Aligns incentives. Participants remain engaged as tokens unlock.</li>
+          <li>Can combine with other mechanisms (streaming Dutch auction, streaming LBP).</li>
+        </ul>
+        <p><strong>Tradeoffs:</strong></p>
+        <ul>
+          <li>Complexity for participants who want immediate liquidity.</li>
+          <li>Requires infrastructure for stream management and claiming.</li>
+          <li>Does not address initial allocation fairness, only post-sale distribution.</li>
+        </ul>
+        <p><strong>When to use:</strong> When reducing sell pressure is a priority and you want long-term holder alignment. Often combined with other mechanisms rather than used alone.</p>
+        <p><strong>Implementations:</strong> Sablier, Superfluid, Hedgey, custom vesting contracts.</p>
+      </article>
+
+      <article id="fair-mint">
+        <h3>Fair Mint Models</h3>
+        <p>Fair mints have no presale, no VC allocation, and no team allocation beyond a stated and capped percentage. Everyone mints on the same terms.</p>
+        <p><strong>How it works:</strong> A minting contract allows anyone to mint tokens at a fixed cost (or free plus gas) until supply is exhausted. There is no sale window or first-mover advantage beyond transaction ordering. Team allocation, if any, is minted through the same mechanism or transparently reserved at contract deployment.</p>
+        <p><strong>Fairness properties:</strong></p>
+        <ul>
+          <li>Maximum egalitarianism. No insider terms whatsoever.</li>
+          <li>Transparent supply and allocation from genesis.</li>
+          <li>Community-first distribution by design.</li>
+        </ul>
+        <p><strong>Tradeoffs:</strong></p>
+        <ul>
+          <li>No capital raised for development (unless mint has a cost).</li>
+          <li>Gas wars on high-demand mints.</li>
+          <li>Bots and sybils can dominate without caps or attestations.</li>
+        </ul>
+        <p><strong>When to use:</strong> When community legitimacy and egalitarian distribution matter more than capital formation. Popular for memecoins, social tokens, and experimental projects.</p>
+        <p><strong>Implementations:</strong> ERC-20 fair mint contracts, inscription-style mints, custom contracts.</p>
+      </article>
+
+      <article id="ico">
+        <h3>A Note on ICOs</h3>
+        <p>Initial Coin Offerings have a mixed reputation. The 2017-2018 ICO boom produced many extractive, predatory launches that left retail holding worthless tokens. But the mechanism itself is neutral. An ICO is simply a public token sale, and the structure determines whether it is fair or exploitative.</p>
+        <p>A well-structured ICO can be one of the fairest distribution methods available: fixed price, public access, no insider discounts, clear terms. The problems arise when ICOs include hidden presale rounds, massive VC allocations, short lockups for insiders, or misleading documentation.</p>
+        <p>Do not dismiss ICOs as inherently bad. Evaluate each one on its structure. A transparent ICO with equal terms for all participants, reasonable team allocation with long vesting, and honest communication is a legitimate fair launch. The mechanisms in this handbook can all be applied to ICO structures to make them fairer.</p>
+      </article>
+    </section>
+
+    <section id="sybil">
+      <h2>VI. Sybil Resistance Toolkit</h2>
+      <p class="section-summary">Tools and techniques to prevent whale domination through multiple wallets.</p>
+      <p>Sybil attacks occur when a single entity creates multiple wallets to circumvent per-wallet caps. These tools help:</p>
+
+      <h3>Wallet Caps</h3>
+      <p>Per-wallet purchase limits. Simple to implement but trivially circumvented by creating multiple wallets. Useful as a baseline, not a complete solution.</p>
+
+      <h3>Proof of Personhood</h3>
+      <p>Attestations that a wallet belongs to a unique human. Options include:</p>
+      <ul>
+        <li><strong>Gitcoin Passport:</strong> Aggregates multiple identity signals (Twitter, GitHub, ENS) into a score.</li>
+        <li><strong>Worldcoin:</strong> Biometric verification via iris scan. Strong uniqueness guarantee but controversial.</li>
+        <li><strong>BrightID:</strong> Social graph-based verification. Requires in-person or video verification.</li>
+        <li><strong>Civic, Polygon ID:</strong> KYC-based identity with onchain attestations.</li>
+      </ul>
+
+      <h3>Social Attestations</h3>
+      <p>Require participants to have established social presence:</p>
+      <ul>
+        <li>Minimum account age on Twitter, Discord, or GitHub.</li>
+        <li>NFT ownership proving community membership (e.g., held before announcement).</li>
+        <li>Onchain history requirements (transactions, DeFi usage, age of first transaction).</li>
+      </ul>
+
+      <h3>Time-Weighted Participation</h3>
+      <p>Weight allocations by how long participants have been engaged:</p>
+      <ul>
+        <li>Snapshot-based allocations for existing community members.</li>
+        <li>Linear vesting of purchase rights over the sale window.</li>
+        <li>Higher caps for wallets with longer onchain history.</li>
+      </ul>
+
+      <h3>Quadratic Mechanisms</h3>
+      <p>Sublinear scaling of allocation with deposit size:</p>
+      <ul>
+        <li>Quadratic funding: matching funds scale with number of contributors, not amount.</li>
+        <li>Quadratic voting for allocation decisions.</li>
+        <li>Square-root caps: deposit $100 to buy 10 tokens, $10,000 to buy 100 tokens.</li>
+      </ul>
+
+      <p><strong>Practical guidance:</strong> Combine multiple mechanisms. Wallet caps plus Gitcoin Passport plus onchain history requirements create meaningful friction for sybils without excluding legitimate participants. Accept that some sybil activity is unavoidable and design for resilience rather than perfection.</p>
+
+      <h3>Limitations</h3>
+      <p>All sybil resistance methods can be circumvented. The most common workaround is smurfing: creating multiple accounts and distributing funds across them to participate by proxy. These methods increase friction and cost for attackers but will not stop determined actors with sufficient resources.</p>
+    </section>
+
+    <section id="benchmarks">
+      <h2>VII. Tokenomics Benchmarks</h2>
+      <p class="section-summary">Reference ranges for allocations, vesting, and pricing.</p>
+      <p>Reference ranges for evaluating whether allocations and vesting schedules are fair. These are guidelines, not absolutes.</p>
+
+      <h3>Allocation Ranges</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Fair Range</th>
+            <th>Aggressive</th>
+            <th>Red Flag</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Team + Founders</td>
+            <td>10-20%</td>
+            <td>20-25%</td>
+            <td>&gt;25%</td>
+          </tr>
+          <tr>
+            <td>Investors (all rounds)</td>
+            <td>0-15%</td>
+            <td>15-25%</td>
+            <td>&gt;30%</td>
+          </tr>
+          <tr>
+            <td>Public Sale</td>
+            <td>&gt;30%</td>
+            <td>20-30%</td>
+            <td>&lt;15%</td>
+          </tr>
+          <tr>
+            <td>Treasury/Ecosystem</td>
+            <td>20-40%</td>
+            <td>40-50%</td>
+            <td>&gt;50% without governance</td>
+          </tr>
+          <tr>
+            <td>Advisors</td>
+            <td>1-3%</td>
+            <td>3-5%</td>
+            <td>&gt;5%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Vesting Schedules</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Recipient</th>
+            <th>Minimum Cliff</th>
+            <th>Recommended Vesting</th>
+            <th>Red Flag</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Team</td>
+            <td>12 months</td>
+            <td>4 years linear after cliff</td>
+            <td>No cliff or &lt;6 months</td>
+          </tr>
+          <tr>
+            <td>Seed Investors</td>
+            <td>12 months</td>
+            <td>2-3 years linear</td>
+            <td>&lt;6 month cliff</td>
+          </tr>
+          <tr>
+            <td>Strategic/Series A</td>
+            <td>6-12 months</td>
+            <td>18-24 months linear</td>
+            <td>Immediate unlock</td>
+          </tr>
+          <tr>
+            <td>Advisors</td>
+            <td>6 months</td>
+            <td>2 years linear</td>
+            <td>No vesting</td>
+          </tr>
+          <tr>
+            <td>Public Participants</td>
+            <td>None required</td>
+            <td>Immediate or short</td>
+            <td>Longer than insiders</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Pricing Fairness</h3>
+      <ul>
+        <li><strong>No discount:</strong> All participants pay the same price. Ideal.</li>
+        <li><strong>Under 20% discount:</strong> Early risk premium. Acceptable if vesting is proportionally longer.</li>
+        <li><strong>20-50% discount:</strong> Significant advantage. Requires much longer vesting to be fair.</li>
+        <li><strong>Over 50% discount:</strong> Extractive. Public participants are exit liquidity.</li>
+      </ul>
+
+      <h3>Float and FDV</h3>
+      <ul>
+        <li><strong>Initial float:</strong> At least 20-30% of supply should be circulating at launch. Low float enables manipulation.</li>
+        <li><strong>FDV ratio:</strong> If FDV exceeds 50x the amount raised, valuation is likely inflated.</li>
+        <li><strong>Unlock schedule:</strong> Major unlocks should not exceed 10% of circulating supply at once.</li>
+      </ul>
+    </section>
+
+    <section id="red-flags">
+      <h2>VIII. Red Flags Checklist</h2>
+      <p class="section-summary">Warning signs that a launch may not be as fair as advertised.</p>
+      <p>For retail participants evaluating whether a launch is fair:</p>
+
+      <h3>Presale Terms</h3>
+      <ul>
+        <li>Is there a presale or private round? At what discount to public price?</li>
+        <li>How much of total supply went to presale participants?</li>
+        <li>What are the lockup terms? Short lockups (under 6 months) are a warning sign.</li>
+      </ul>
+
+      <h3>Allocation Distribution</h3>
+      <ul>
+        <li>What percentage goes to team? Reasonable range is 10-20%. Over 25% is aggressive.</li>
+        <li>What percentage goes to VCs and private investors? Lower is better.</li>
+        <li>What percentage is available to public? Under 20% public allocation is a red flag.</li>
+        <li>Is there a treasury or ecosystem fund? Is its use governed by token holders?</li>
+      </ul>
+
+      <h3>Mechanism Transparency</h3>
+      <ul>
+        <li>Is the sale mechanism documented and auditable?</li>
+        <li>Are contracts verified on block explorers?</li>
+        <li>Is there a clear timeline with specific dates and parameters?</li>
+      </ul>
+
+      <h3>Whale Protections</h3>
+      <ul>
+        <li>Are there per-wallet caps?</li>
+        <li>Is there sybil resistance beyond simple caps?</li>
+        <li>Can large holders dominate through multiple entities?</li>
+      </ul>
+
+      <h3>Post-Launch Dynamics</h3>
+      <ul>
+        <li>When do insider tokens unlock? Cliff and vesting schedules matter.</li>
+        <li>Are there any agreements for market making, liquidity, or price support?</li>
+        <li>Is the token immediately tradeable or is there a lockup period for all participants?</li>
+      </ul>
+
+      <p><strong>Rule of thumb:</strong> If insiders (team, VCs, advisors) have more than 50% of supply, shorter lockups than public participants, or significant price discounts, the launch is not fair regardless of marketing claims.</p>
+    </section>
+
+    <section id="score">
+      <h2>IX. Fairness Score</h2>
+      <p class="section-summary">A 15-point rubric to evaluate any token launch.</p>
+      <p>Rate any token launch. One point per criterion met. Share your score.</p>
+
+      <div class="scorecard">
+        <h3>Pricing (3 points)</h3>
+        <ul class="checklist">
+          <li><span class="box"></span> No presale or private rounds</li>
+          <li><span class="box"></span> All participants pay the same price (or same auction)</li>
+          <li><span class="box"></span> Price determined by market mechanism, not team</li>
+        </ul>
+
+        <h3>Allocation (3 points)</h3>
+        <ul class="checklist">
+          <li><span class="box"></span> Public allocation exceeds 30%</li>
+          <li><span class="box"></span> Team allocation under 20%</li>
+          <li><span class="box"></span> No hidden advisor or "ecosystem" insider buckets</li>
+        </ul>
+
+        <h3>Vesting (3 points)</h3>
+        <ul class="checklist">
+          <li><span class="box"></span> Team cliff of 12+ months</li>
+          <li><span class="box"></span> Insider vesting longer than public lockup</li>
+          <li><span class="box"></span> No TGE unlocks for insiders</li>
+        </ul>
+
+        <h3>Transparency (3 points)</h3>
+        <ul class="checklist">
+          <li><span class="box"></span> Contracts verified and audited</li>
+          <li><span class="box"></span> All insider wallets disclosed</li>
+          <li><span class="box"></span> Sale announced 7+ days in advance</li>
+        </ul>
+
+        <h3>Access (3 points)</h3>
+        <ul class="checklist">
+          <li><span class="box"></span> Per-wallet caps prevent whale domination</li>
+          <li><span class="box"></span> No whitelist favoring insiders</li>
+          <li><span class="box"></span> Mechanism prevents gas wars / MEV</li>
+        </ul>
+      </div>
+
+      <div class="score-guide">
+        <p><strong>13-15:</strong> Exemplary fair launch</p>
+        <p><strong>10-12:</strong> Reasonably fair with minor concerns</p>
+        <p><strong>7-9:</strong> Significant fairness gaps</p>
+        <p><strong>4-6:</strong> Insider-advantaged structure</p>
+        <p><strong>0-3:</strong> Avoid</p>
+      </div>
+    </section>
+
+    <section id="mistakes">
+      <h2>X. Common Mistakes</h2>
+      <p class="section-summary">Avoid these errors that undermine fair launches.</p>
+
+      <h3>Caps That Do Not Cap</h3>
+      <p>Setting per-wallet limits so high they are meaningless. A $100,000 cap on a $5M raise means whales face no real constraint. Effective caps should limit individual participation to a small fraction of the total raise (1-5%).</p>
+
+      <h3>Vesting Theater</h3>
+      <p>Insider vesting that appears long but has loopholes: partial immediate unlocks (20% TGE), short cliffs marketed as long vesting, or ability to stake locked tokens for yield. Vesting should be simple: cliff, then linear release, no exceptions.</p>
+
+      <h3>Hidden Advisor Allocations</h3>
+      <p>Advisor tokens buried in "ecosystem" or "community" buckets. If 15% is labeled community but 10% goes to unnamed advisors, the tokenomics are misleading. All insider allocations should be explicitly labeled with vesting terms.</p>
+
+      <h3>Team Treasury Control</h3>
+      <p>Large treasury allocations (30-50%) controlled by the team without governance constraints. This is effectively team allocation with extra steps. Treasury use should require token holder approval or be governed by transparent multisig with independent signers.</p>
+
+      <h3>Short Private Sale Windows</h3>
+      <p>Announcing a public sale with 24-hour notice while VCs had weeks to prepare. Information asymmetry in timing is as unfair as information asymmetry in pricing. Public announcements should precede sales by at least one week.</p>
+
+      <h3>Fake Price Discovery</h3>
+      <p>Using an LBP or Dutch auction but setting parameters to ensure a predetermined outcome. Starting price too low, weight curve too flat, or auction duration too short. Mechanism legitimacy requires honest parameterization.</p>
+
+      <h3>Retroactive Terms Changes</h3>
+      <p>Modifying vesting schedules, adding new token categories, or changing allocation percentages after the public sale. Terms at sale time should be immutable. Any changes should benefit public participants, not insiders.</p>
+
+      <h3>Liquidity Extraction</h3>
+      <p>Team providing initial liquidity, then removing it after price appreciation. Liquidity commitments should be locked or burned. LP tokens in team wallets are a liability, not an asset.</p>
+    </section>
+
+    <section id="checklist">
+      <h2>XI. Pre-Launch Checklist</h2>
+      <p class="section-summary">Everything to have ready before announcing your launch.</p>
+
+      <h3>Contracts and Security</h3>
+      <ul>
+        <li>Complete audit from reputable firm with public report</li>
+        <li>Contracts verified on block explorer (Etherscan, etc.)</li>
+        <li>Ownership renounced or transferred to multisig/governance</li>
+        <li>No privileged functions that can modify sale terms</li>
+        <li>If upgradeable, timelock on upgrades (48h minimum)</li>
+      </ul>
+
+      <h3>Tokenomics Documentation</h3>
+      <ul>
+        <li>Complete allocation breakdown with percentages</li>
+        <li>Vesting schedules for all categories (cliff + duration)</li>
+        <li>Unlock calendar with specific dates</li>
+        <li>All investor rounds disclosed with pricing</li>
+        <li>Treasury governance mechanism documented</li>
+      </ul>
+
+      <h3>Sale Mechanism</h3>
+      <ul>
+        <li>Mechanism parameters published in advance (caps, duration, pricing)</li>
+        <li>Start time announced minimum 7 days before</li>
+        <li>Per-wallet caps set relative to raise size</li>
+        <li>Sybil resistance mechanism selected and documented</li>
+        <li>Refund mechanism for failed transactions or oversubscription</li>
+      </ul>
+
+      <h3>Post-Sale Commitments</h3>
+      <ul>
+        <li>Initial liquidity plan (amount, duration of lock, who controls)</li>
+        <li>LP token handling (burn, lock, or governance)</li>
+        <li>Exchange listing timeline (if applicable)</li>
+        <li>No insider selling for defined period post-launch</li>
+      </ul>
+
+      <h3>Transparency</h3>
+      <ul>
+        <li>Team identities public or credibly pseudonymous</li>
+        <li>All insider wallets disclosed</li>
+        <li>Historical funding disclosed (grants, prior rounds)</li>
+        <li>Public communication channel for questions</li>
+        <li>Clear process for reporting issues</li>
+      </ul>
+    </section>
+
+    <section id="communication">
+      <h2>XII. Communication Guidelines</h2>
+      <p class="section-summary">How to announce and document your launch clearly.</p>
+      <p>How you communicate a fair launch matters as much as the mechanism itself. Poor communication creates confusion and erodes trust even when the underlying structure is sound.</p>
+
+      <h3>Announcement Timing</h3>
+      <p>Announce the sale at least 7 days before it begins. This gives participants time to research, prepare funds, and ask questions. Shorter windows favor insiders who already know the details. Include the exact start time in UTC and link to a countdown.</p>
+
+      <h3>Tokenomics Documentation</h3>
+      <p>Publish a single, comprehensive document covering:</p>
+      <ul>
+        <li>Total supply and whether it is fixed or inflationary</li>
+        <li>Allocation percentages for every category (team, investors, public, treasury, etc.)</li>
+        <li>Vesting schedules with cliff and duration for each category</li>
+        <li>Unlock calendar with specific dates</li>
+        <li>Contract addresses for token, vesting, and sale contracts</li>
+        <li>Audit reports with links to full documents</li>
+      </ul>
+      <p>Do not scatter this information across multiple blog posts, tweets, and Discord messages. A single source of truth prevents confusion and makes verification easier.</p>
+
+      <h3>Mechanism Explanation</h3>
+      <p>Explain how the sale works in plain language. Most participants are not familiar with Dutch auctions, LBPs, or batch auctions. Cover:</p>
+      <ul>
+        <li>How to participate step by step</li>
+        <li>How the price is determined</li>
+        <li>What happens if the sale is oversubscribed</li>
+        <li>When and how tokens are distributed</li>
+        <li>How to verify the transaction succeeded</li>
+      </ul>
+      <p>Include a FAQ addressing common questions. Update it as new questions arise during the announcement period.</p>
+
+      <h3>Wallet Disclosure</h3>
+      <p>Publish a list of all insider wallets: team members, investors, advisors, and treasury. Label each wallet with its owner and allocation. This allows the community to monitor movements and verify that vesting is being respected. Projects that refuse to disclose wallets are hiding something.</p>
+
+      <h3>Communication Channels</h3>
+      <p>Designate official channels and stick to them. A Discord server or Telegram group for questions, a Twitter account for announcements, and a documentation site for reference. Do not make important announcements only in Discord where they get buried. Cross-post everything significant to Twitter and your docs.</p>
+
+      <h3>Post-Sale Communication</h3>
+      <p>After the sale, publish a summary: total raised, number of participants, final clearing price (if applicable), and distribution statistics. Continue regular updates on development progress and treasury usage. Projects that go silent after raising money lose community trust quickly.</p>
+
+      <h3>Handling Problems</h3>
+      <p>If something goes wrong during the sale, communicate immediately. Acknowledge the issue, explain what happened, and describe the fix. Silence during problems is worse than admitting mistakes. Communities forgive technical issues handled transparently but not cover-ups or delays.</p>
+    </section>
+
+    <section id="resources">
+      <h2>XIII. Implementation Resources</h2>
+      <p class="section-summary">Platforms, contracts, and tools for running fair launches.</p>
+
+      <h3>Auction Platforms</h3>
+      <ul>
+        <li><a href="https://gnosis-auction.eth.limo/" rel="noopener">Gnosis Auction</a> - Dutch auction platform</li>
+        <li><a href="https://fjordfoundry.com/" rel="noopener">Fjord Foundry</a> - LBP platform (formerly Copper)</li>
+        <li><a href="https://docs.balancer.fi/" rel="noopener">Balancer Docs</a> - Pool documentation including LBPs</li>
+      </ul>
+
+      <h3>Vesting and Streaming</h3>
+      <ul>
+        <li><a href="https://sablier.com/" rel="noopener">Sablier</a> - Token streaming protocol</li>
+        <li><a href="https://superfluid.org/" rel="noopener">Superfluid</a> - Real-time finance streams</li>
+        <li><a href="https://hedgey.finance/" rel="noopener">Hedgey</a> - Token vesting infrastructure</li>
+      </ul>
+
+      <h3>Identity and Sybil Resistance</h3>
+      <ul>
+        <li><a href="https://passport.xyz/" rel="noopener">Gitcoin Passport</a> - Composable identity scoring</li>
+        <li><a href="https://www.brightid.org/" rel="noopener">BrightID</a> - Social identity network</li>
+        <li><a href="https://world.org/" rel="noopener">World</a> - Biometric proof of personhood</li>
+      </ul>
+
+      <h3>Contract Templates and Tools</h3>
+      <ul>
+        <li><a href="https://github.com/gnosis/ido-contracts" rel="noopener">Gnosis IDO Contracts</a> - Audited auction contracts</li>
+        <li><a href="https://github.com/sablier-labs/v2-core" rel="noopener">Sablier v2 Core</a> - Streaming contract source</li>
+        <li><a href="https://github.com/Uniswap/v4-core" rel="noopener">Uniswap v4 Core</a> - Hook-enabled AMM</li>
+      </ul>
+
+      <h3>Research and Analysis</h3>
+      <ul>
+        <li><a href="https://www.paradigm.xyz/2022/04/gda" rel="noopener">Gradual Dutch Auctions (Paradigm)</a></li>
+      </ul>
+    </section>
+
+    <section id="verification">
+      <h2>XIV. Onchain Verification</h2>
+      <p class="section-summary">How to verify fair launch claims using public blockchain data.</p>
+
+      <h3>Contract Ownership</h3>
+      <p>Check who controls the token and sale contracts:</p>
+      <ul>
+        <li>Go to Etherscan, paste the contract address, click "Read Contract"</li>
+        <li>Look for <code>owner()</code>, <code>admin()</code>, or similar functions</li>
+        <li>If owner is an EOA (regular wallet), the team has full control</li>
+        <li>If owner is a multisig (Gnosis Safe), check the signers and threshold</li>
+        <li>If owner is <code>0x0000...0000</code>, ownership is renounced</li>
+        <li>Check "Write Contract" for privileged functions like <code>mint()</code>, <code>pause()</code>, <code>setPrice()</code></li>
+      </ul>
+
+      <h3>Burned Keys Verification</h3>
+      <p>Verify claims that contract keys were burned:</p>
+      <ul>
+        <li>Check if ownership was transferred to the zero address or a burn address</li>
+        <li>Look for <code>OwnershipTransferred</code> events in the contract's event log</li>
+        <li>Verify the transaction hashes if the project published them</li>
+        <li>For proxy contracts, check both the proxy and implementation ownership</li>
+      </ul>
+
+      <h3>Token Distribution</h3>
+      <p>Verify actual vs. claimed allocations:</p>
+      <ul>
+        <li>Use Etherscan's "Holders" tab to see top token holders</li>
+        <li>Cross-reference large holders with disclosed team/investor wallets</li>
+        <li>Check if "community" or "ecosystem" wallets are actually controlled by the team</li>
+        <li>Use tools like Arkham, Nansen, or DeBank to identify wallet clusters</li>
+      </ul>
+
+      <h3>Vesting Contracts</h3>
+      <p>Verify vesting claims:</p>
+      <ul>
+        <li>Find the vesting contract address (should be disclosed)</li>
+        <li>Read <code>vestingSchedule()</code>, <code>cliff()</code>, <code>duration()</code> functions</li>
+        <li>Check <code>releasable()</code> to see how much can currently be claimed</li>
+        <li>Verify beneficiary addresses match disclosed insider wallets</li>
+        <li>Look for <code>revoke()</code> functions that could allow early release</li>
+      </ul>
+
+      <h3>Liquidity Locks</h3>
+      <p>Verify LP token commitments:</p>
+      <ul>
+        <li>Find the LP token address (e.g., Uniswap V2 pair contract)</li>
+        <li>Check top holders of the LP token</li>
+        <li>If locked, verify the lock contract (Unicrypt, Team.Finance, etc.)</li>
+        <li>Read the lock contract to confirm unlock date and beneficiary</li>
+        <li>Be wary of locks with admin functions that allow early withdrawal</li>
+      </ul>
+
+      <h3>Sale Mechanism Parameters</h3>
+      <p>Verify sale contract configuration:</p>
+      <ul>
+        <li>For Dutch auctions: check <code>startPrice()</code>, <code>endPrice()</code>, <code>duration()</code></li>
+        <li>For LBPs: verify weight curves match documentation</li>
+        <li>Check <code>maxPerWallet()</code> or similar cap functions</li>
+        <li>Verify start and end times match announcements</li>
+        <li>Look for hidden whitelist functions or exemptions</li>
+      </ul>
+
+      <h3>Tools</h3>
+      <ul>
+        <li><a href="https://etherscan.io" rel="noopener">Etherscan</a> - Contract verification and reading</li>
+        <li><a href="https://app.safe.global" rel="noopener">Safe (Gnosis Safe)</a> - Multisig verification</li>
+        <li><a href="https://arkm.com/" rel="noopener">Arkham Intelligence</a> - Wallet identification</li>
+        <li><a href="https://debank.com" rel="noopener">DeBank</a> - Portfolio and wallet analysis</li>
+        <li><a href="https://dune.com" rel="noopener">Dune Analytics</a> - Custom queries on token distribution</li>
+      </ul>
+    </section>
+
+    <section id="case-studies">
+      <h2>XV. Case Studies</h2>
+      <p class="section-summary">Real examples of fair and unfair launches, and what made the difference.</p>
+
+      <h3>Fair Launches</h3>
+
+      <article>
+        <h4>Uniswap (UNI) - Retroactive Airdrop</h4>
+        <p>In September 2020, Uniswap distributed 15% of total supply (150 million UNI) to historical users via retroactive airdrop. Every address that had interacted with the protocol before September 1, 2020 received a minimum of 400 UNI, regardless of transaction volume or value. Liquidity providers received additional allocations proportional to their contributions.</p>
+        <p>The airdrop was announced without prior warning, making it impossible to game. Snapshot criteria were based entirely on historical onchain activity. No presale rounds existed, and no investors received discounted tokens. The remaining supply was allocated to governance treasury (43%), team with 4-year vesting (21.5%), and future liquidity mining (10%).</p>
+        <p>At launch, UNI traded around $3, valuing the 400 UNI minimum airdrop at $1,200. Users who had made a single failed transaction still qualified. The distribution reached over 250,000 addresses, creating one of the broadest initial token distributions in DeFi history.</p>
+        <p><strong>Why it worked:</strong> Retroactive criteria eliminated gaming. Uniform minimum distribution ensured small users benefited equally. No capital requirement for participation. Team tokens vested over 4 years with 1-year cliff, aligning long-term incentives.</p>
+      </article>
+
+      <article>
+        <h4>Liquity (LQTY) - No VC, No Presale</h4>
+        <p>Liquity launched in April 2021 as a decentralized borrowing protocol with zero VC funding and no private sale rounds. The team rejected traditional fundraising, instead bootstrapping development and launching directly to the public. Total supply is 100 million LQTY with a fixed, non-inflationary cap.</p>
+        <p>Token distribution occurred through two mechanisms: protocol usage rewards and a public Balancer LBP. Stability pool depositors and frontend operators earn LQTY emissions over time. The LBP ran for 3 days, allowing fair price discovery without first-mover advantages. Starting price was set high and declined until market equilibrium.</p>
+        <p>Team and early contributor allocation was 23.7% with a 1-year cliff followed by 3-year linear vesting. No tokens were sold at a discount. The protocol itself is immutable with no admin keys, governance tokens, or upgrade mechanisms. Liquity operates as permanent, unstoppable infrastructure.</p>
+        <p><strong>Why it worked:</strong> Rejecting VC money eliminated insider discounts entirely. LBP mechanism prevented gas wars and sniping. Long vesting aligned team with protocol success. Immutable contracts removed trust requirements and rug risk.</p>
+      </article>
+
+      <article>
+        <h4>Bitcoin - Fair Mint</h4>
+        <p>Bitcoin launched on January 3, 2009 with no premine, no presale, and no insider allocation. Satoshi Nakamoto announced the software on a cryptography mailing list and anyone could begin mining from block zero. The genesis block contained a newspaper headline as proof of the launch date, establishing transparency from the start.</p>
+        <p>Distribution occurred exclusively through proof-of-work mining. Early blocks rewarded 50 BTC, halving every 210,000 blocks. Satoshi mined early blocks but did so publicly using the same software available to everyone. Estimated Satoshi holdings of ~1 million BTC came from early mining, not allocation. These coins have never moved.</p>
+        <p>The supply schedule was coded immutably: 21 million maximum supply, predictable issuance curve, no mechanism for modification. No foundation, company, or team controls the protocol. Development occurs through open-source contribution and rough consensus.</p>
+        <p><strong>Why it worked:</strong> Zero information asymmetry at launch. No privileged access or discounted terms. Pure proof-of-work distribution rewarded computational contribution. Immutable monetary policy removed discretionary control. Founder coins remain untouched, demonstrating long-term alignment.</p>
+      </article>
+
+      <article>
+        <h4>Based Money ($BASED) - DeFi Fair Launch</h4>
+        <p>Launched in August 2020 during DeFi summer, Based Money combined Ampleforth's rebase mechanics with YFI's fair distribution model. No premine, no VC allocation, no founder fees. The developers burned the contract private keys across four Ethereum transactions, making the protocol permanently immutable and exit scams impossible.</p>
+        <p>Distribution occurred through two staking pools. Pool 0 distributed 25,000 BASED to Curve sUSDv2 LP stakers on a 24-hour halving schedule. Pool 1 distributed 75,000 BASED to Uniswap LP stakers on a 72-hour halving schedule. For the first 24 hours, deposits were capped at 12,000 LP tokens per account to prevent whale domination.</p>
+        <p>The protocol implements a rebase mechanism targeting 1:1 parity with sUSD. Supply adjusts proportionally for all holders, so relative ownership percentages remain constant regardless of rebase direction. Rebasing was disabled until 97% of tokens were claimed, allowing stable initial distribution.</p>
+        <p><strong>Why it worked:</strong> Burned keys removed trust requirements. Anti-whale caps on day one. Staking-based distribution required active participation. Community remains active five years later, demonstrating long-term sustainability of fair launch models.</p>
+      </article>
+
+      <article>
+        <h4>Jay Pegs Auto Mart ($DONA) - Batch Auction</h4>
+        <p>In September 2021, Jay Pegs Auto Mart launched $DONA tokens via batch auction on MISO (SushiSwap's launch platform). The auction raised 865 ETH (~$3.1M) in less than an hour with wide distribution across participants. No VC allocation, no presale rounds, no insider pricing.</p>
+        <p>The batch auction mechanism collected all bids during a fixed window, then cleared at a uniform price. Every participant paid the same rate regardless of when they bid. Pro-rata allocation meant oversubscription was handled fairly rather than through gas wars or first-come-first-serve dynamics.</p>
+        <p>The project demonstrated that fair launches can be both fast and capital efficient. Traditional fundraising at this scale would require weeks of VC negotiations and due diligence. The batch auction accomplished the same result in under an hour while distributing ownership broadly.</p>
+        <p><strong>Why it worked:</strong> Batch auction eliminated timing advantages and MEV. Uniform clearing price meant no insider discounts. Pro-rata allocation prevented whale domination. Speed proved fair launches are not inherently slow.</p>
+      </article>
+
+      <h3>Unfair Launches</h3>
+
+      <article>
+        <h4>ICP (Internet Computer) - VC Extraction</h4>
+        <p>ICP launched in May 2021 with 24.7% of supply going to early contributors and seed investors at an estimated $0.03-0.04 per token. Public launch price was approximately $700. Early investors saw ~20,000x paper gains. Retail participants who bought at launch faced immediate and sustained selling pressure as insider tokens unlocked.</p>
+        <p><strong>What went wrong:</strong> Massive presale discount. Compressed unlock schedules. Retail became exit liquidity for insiders.</p>
+      </article>
+
+      <article>
+        <h4>EOS - Misaligned Incentives</h4>
+        <p>EOS ran a year-long ICO from June 2017 to June 2018, raising approximately $4 billion. Block.one, the company behind EOS, retained 10% of tokens plus the entire $4 billion in proceeds. The SEC later fined Block.one $24 million for conducting an unregistered securities offering.</p>
+        <p>Rather than deploying capital to develop the EOS ecosystem, Block.one used ICO funds to purchase Bitcoin and other investments. The company sat on billions while the network struggled to gain adoption. Questions about wash trading during the ICO raised further concerns about the legitimacy of reported demand.</p>
+        <p><strong>What went wrong:</strong> Misaligned incentives between issuer and token holders. No accountability for use of funds. Company enriched itself while ecosystem languished. SEC settlement confirmed regulatory violations.</p>
+      </article>
+
+      <article>
+        <h4>EIGEN (EigenLayer) - Insider Favoritism</h4>
+        <p>EigenLayer launched EIGEN in May 2024 with 55% of tokens allocated to investors and team, while early stakers who made the protocol successful received just 5%. Tokens were non-transferable at launch, giving insiders an advantage: they could wait for better prices while retail was locked out of price discovery.</p>
+        <p>Users from the US, Canada, and China were excluded from the airdrop despite being allowed to use the protocol and contribute liquidity. Evidence of suspected insider trading emerged when a whale deposited 4000 ETH, then withdrew one day after the snapshot. The foundation revised allocations after backlash, adding 100 EIGEN per user, but the damage to trust was done.</p>
+        <p><strong>What went wrong:</strong> Extreme insider allocation (55% vs 5% community). Geographic exclusions punished contributors. Non-transferability advantaged insiders. Suspected information leaks before snapshot.</p>
+      </article>
+
+      <article>
+        <h4>ZK (zkSync) - Airdrop Dump</h4>
+        <p>zkSync launched ZK in June 2024 with 16.1% to team and 17.2% to investors. The airdrop reached only 695,000 wallets out of a 7 million member community. Within hours, 41% of top airdrop recipients dumped their entire allocation. The token crashed 34.5% and TVL dropped from $200 million to $128 million as users fled the ecosystem.</p>
+        <p>The launch lacked Sybil filtering, with approximately 80 million ZK tokens going to 47,000 Sybil addresses. Loyal users who had traded significant amounts and paid heavy gas fees over years were excluded while farmers captured outsized allocations. The community labeled it "ZkScam."</p>
+        <p><strong>What went wrong:</strong> Insider-heavy allocation. No Sybil resistance. Loyal users excluded while farmers rewarded. Immediate mass dumping by recipients. Community trust destroyed.</p>
+      </article>
+
+      <article>
+        <h4>Most 2021-2022 VC-Backed Tokens</h4>
+        <p>A common pattern: 20-40% to VCs at 80-95% discount to public FDV. 6-12 month cliffs with 2-3 year vesting. Launch at high FDV with limited public float. Sustained selling pressure as unlocks occur.</p>
+        <p><strong>What went wrong:</strong> Structural advantage for insiders. Public participants have no way to compete with VC cost basis. Tokenomics designed to maximize founder and VC returns rather than community value.</p>
+      </article>
+
+      <article>
+        <h4>Gas War Launches</h4>
+        <p>First-come-first-serve launches without caps or batching. Examples include many 2021 NFT mints and token launches. Participants compete on gas fees. Wealthy participants and sophisticated bots capture allocation. Average users are priced out or fail to participate.</p>
+        <p><strong>What went wrong:</strong> Capital advantage determines allocation. Value extraction to miners/validators. Excludes participants who cannot afford gas premium.</p>
+      </article>
+    </section>
+
+    <section id="post-launch">
+      <h2>XVI. Post-Launch</h2>
+      <p class="section-summary">What to monitor after the token goes live.</p>
+      <p>Fair distribution is the starting point. What happens after TGE determines whether fairness persists.</p>
+
+      <h3>Monitoring Unlocks</h3>
+      <p>Track insider unlock schedules and watch for selling patterns. Large unlocks should be announced in advance. If team or investor wallets start moving tokens to exchanges before scheduled unlocks, something is wrong. Tools like Arkham and Nansen can alert you to wallet movements.</p>
+
+      <h3>Liquidity Health</h3>
+      <p>Initial liquidity commitments should remain locked for the stated duration. Monitor LP token holders and lock contracts. If the team removes liquidity early or the pool becomes thin relative to market cap, exit risk increases. Healthy projects maintain or grow liquidity over time.</p>
+
+      <h3>Governance Transition</h3>
+      <p>Projects with treasury allocations should transition to community governance. Watch for: governance proposals going live, multisig signer changes to include community members, and treasury decisions being made onchain rather than by team fiat. A project that promised decentralization but still operates with team-controlled wallets after 12 months has not delivered.</p>
+
+      <h3>Supply Integrity</h3>
+      <p>Verify that no new tokens are minted outside the stated schedule. Check total supply on block explorers against documented tokenomics. Some contracts have hidden mint functions or admin keys that were not disclosed. If supply increases unexpectedly, the tokenomics were not as described.</p>
+
+      <h3>Communication Patterns</h3>
+      <p>Teams that go quiet after raising money are a warning sign. Regular updates on development, treasury usage, and roadmap progress indicate ongoing commitment. Sudden changes to announced plans, especially regarding token unlocks or allocations, should be scrutinized.</p>
+    </section>
+
+    <section id="community">
+      <h2>XVII. Community</h2>
+      <p class="section-summary">Forums, research, and data sources for fair launch discussions.</p>
+
+      <h3>Forums and Discussion</h3>
+      <ul>
+        <li><a href="https://gov.gitcoin.co/" rel="noopener">Gitcoin Governance Forum</a> - Discussions on public goods funding and fair distribution</li>
+        <li><a href="https://research.lido.fi/" rel="noopener">Lido Research Forum</a> - DAO governance and tokenomics discussions</li>
+        <li><a href="https://forum.balancer.fi/" rel="noopener">Balancer Forum</a> - LBP mechanics and launch discussions</li>
+      </ul>
+
+      <h3>Research and Analysis</h3>
+      <ul>
+        <li><a href="https://www.paradigm.xyz/writing" rel="noopener">Paradigm Research</a> - Mechanism design papers including auction theory</li>
+        <li><a href="https://a16zcrypto.com/posts" rel="noopener">a16z Crypto Research</a> - Token design and governance research</li>
+        <li><a href="https://variant.fund/writing" rel="noopener">Variant Research</a> - Token distribution and ownership analysis</li>
+      </ul>
+
+      <h3>Data and Tracking</h3>
+      <ul>
+        <li><a href="https://transparency.ethcf.org/" rel="noopener">ECF Transparency Dashboard</a> - Financial transparency for project treasuries. Every project with a treasury should use this.</li>
+        <li><a href="https://tokenterminal.com/" rel="noopener">Token Terminal</a> - Protocol fundamentals and token metrics</li>
+        <li><a href="https://tokenomist.ai/" rel="noopener">Tokenomist</a> - Vesting schedules and unlock calendars</li>
+        <li><a href="https://messari.io/" rel="noopener">Messari</a> - Token research and allocation breakdowns</li>
+      </ul>
+
+      <h3>Launch Platforms</h3>
+      <ul>
+        <li><a href="https://fjordfoundry.com/" rel="noopener">Fjord Foundry</a> - LBP launches, active community</li>
+        <li><a href="https://gnosis-auction.eth.limo/" rel="noopener">Gnosis Auction</a> - Batch and Dutch auctions</li>
+        <li><a href="https://echo.xyz/" rel="noopener">Echo</a> - Group-based token launches</li>
+        <li><a href="https://legion.cc/" rel="noopener">Legion</a> - Community token sales</li>
+        <li><a href="https://www.tally.xyz/" rel="noopener">Tally</a> - Token sale infrastructure</li>
+      </ul>
+      <p>Platforms like Echo and Legion are useful for bootstrapping and distribution, but they do not enforce fair launch standards. Projects selling through these platforms may or may not follow best practices. Participants still need to evaluate each launch independently using the criteria in this handbook.</p>
+    </section>
+
+    <section id="glossary">
+      <h2>XVIII. Glossary</h2>
+      <p class="section-summary">Definitions of key terms used throughout this handbook.</p>
+
+      <dl>
+        <dt>Cliff</dt>
+        <dd>A period before any tokens vest. A 12-month cliff means zero tokens are released for the first year, then vesting begins.</dd>
+
+        <dt>Batch Auction</dt>
+        <dd>An auction where all orders are collected over a time window and settle simultaneously at a uniform clearing price. Eliminates timing advantages and MEV.</dd>
+
+        <dt>CCA (Continuous Clearing Auction)</dt>
+        <dd>A type of batch auction with recurring clearing windows. Orders accumulate and clear at uniform price on a schedule. Eliminates MEV and frontrunning.</dd>
+
+        <dt>Dutch Auction</dt>
+        <dd>An auction where price starts high and decreases over time until all tokens are sold. Buyers bid at the price they find acceptable.</dd>
+
+        <dt>EOA (Externally Owned Account)</dt>
+        <dd>A regular wallet controlled by a private key, as opposed to a smart contract wallet or multisig.</dd>
+
+        <dt>FDV (Fully Diluted Valuation)</dt>
+        <dd>Market cap calculated using total token supply (including locked/unvested tokens), not just circulating supply. Often inflated relative to actual liquidity.</dd>
+
+        <dt>Float</dt>
+        <dd>The percentage of token supply that is freely tradeable. Low float enables price manipulation.</dd>
+
+        <dt>LBP (Liquidity Bootstrapping Pool)</dt>
+        <dd>A Balancer pool where token weights shift over time, creating natural downward price pressure that discourages early sniping.</dd>
+
+        <dt>LP (Liquidity Provider)</dt>
+        <dd>Someone who deposits tokens into a decentralized exchange pool to enable trading. LP tokens represent their share of the pool.</dd>
+
+        <dt>MEV (Maximal Extractable Value)</dt>
+        <dd>Value extracted by miners/validators through transaction ordering. Includes frontrunning, sandwich attacks, and arbitrage at the expense of regular users.</dd>
+
+        <dt>Multisig</dt>
+        <dd>A wallet requiring multiple signatures to execute transactions (e.g., 3 of 5 signers). Reduces single points of failure.</dd>
+
+        <dt>Overflow</dt>
+        <dd>A sale mechanism where all deposits are collected, then tokens are allocated pro-rata if demand exceeds supply. Excess funds are refunded.</dd>
+
+        <dt>Premine</dt>
+        <dd>Tokens created before public launch and allocated to insiders. The opposite of fair distribution.</dd>
+
+        <dt>Rebase</dt>
+        <dd>Automatic adjustment of all token balances to target a specific price. Holder percentages remain constant while absolute balances change.</dd>
+
+        <dt>Smurfing</dt>
+        <dd>Creating multiple accounts (smurf accounts) to circumvent per-wallet caps by distributing funds and participating by proxy.</dd>
+
+        <dt>Sybil Attack</dt>
+        <dd>Creating multiple fake identities (wallets) to circumvent per-person limits. Named after the book about multiple personality disorder.</dd>
+
+        <dt>TGE (Token Generation Event)</dt>
+        <dd>The moment tokens are created and become transferable. Often used interchangeably with launch date.</dd>
+
+        <dt>Timelock</dt>
+        <dd>A delay between proposing and executing a contract change. Gives users time to exit before changes take effect.</dd>
+
+        <dt>Vesting</dt>
+        <dd>Gradual release of tokens over time. Linear vesting releases tokens at a constant rate; cliff vesting has an initial lockup period.</dd>
+
+        <dt>Whale</dt>
+        <dd>A holder with a large position relative to total supply or liquidity. Can significantly impact price through buying or selling.</dd>
+      </dl>
+    </section>
+
+    <footer>
+      <p>Written by <a href="https://x.com/0xzak">Zak Cole</a> at <a href="https://numbergroup.xyz">Number Group</a>.</p>
+      <p>Contact: <a href="mailto:zcole@linux.com">zcole@linux.com</a></p>
+      <p>Last updated: January 2026</p>
+    </footer>
+  </main>
+
+  <button id="back-to-top" aria-label="Back to top">Top</button>
+
+  <script>
+    (function() {
+      var btn = document.getElementById('back-to-top');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 400) {
+          btn.classList.add('visible');
+        } else {
+          btn.classList.remove('visible');
+        }
+      });
+      btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+  </script>
+</body>
+</html>
